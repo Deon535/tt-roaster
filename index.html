@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TT Roaster — Специалти кофе и своя обжарка в Буйнакске</title>
+<meta name="description" content="ТТ Ростер — премиальная кофейня и обжарочная в Буйнакске. Свежесваренный кофе, авторские напитки, выпечка и атмосфера тропического путешествия.">
+<meta name="theme-color" content="#faf3e3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='58' fill='%231c3a2a'/%3E%3Cpath d='M60 30c-7 0-9 8-9 14h18c0-6-2-14-9-14z' fill='%23eee0c3'/%3E%3Ccircle cx='60' cy='50' r='5.5' fill='%231c3a2a' stroke='%23eee0c3' stroke-width='1.6'/%3E%3Cpath d='M40 54c4 11 11 15 20 15s16-4 20-15c-5 3-8 4-11 4-2-3-5-5-9-5s-7 2-9 5c-3 0-6-1-11-4z' fill='%23eee0c3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<!--
+  THESIS: tropical-neoretro brand book turned into a website; refuses SaaS
+  cards, Starbucks brown, and white minimalism.
+  OWN-WORLD: deep forest green + sand/cream fields, burnt terracotta accent;
+  hand screenprint botanical illustration; large uppercase editorial type,
+  tracked micro-labels; organic rounded containers; imagery breaks frame.
+  STORY: found-in-travel premium roastery -> interest -> menu/signature ->
+  desire to visit -> directions.
+  FIRST VIEWPORT: fullscreen hero video, soft overlay, tracked kicker,
+  uppercase H1, two CTAs, header carries emblem + RU/EN/AR switch.
+  FORM: editorial travel-poster brand site; form fixed by brief (no roll).
+  FINISH: unreviewed and undocumented is unfinished; this build ends with
+  the finish review, the verdict, DESIGN.md, and every shipping raster
+  carrying its provenance.
+-->
+
+<!-- ============================================================
+     Inline SVG symbol library (self-contained, no fetch required)
+     ============================================================ -->
+<div style="display:none" aria-hidden="true" id="brand-sprite">
+<svg xmlns="http://www.w3.org/2000/svg">
+<symbol id="icon-chevron-down" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="icon-check" viewBox="0 0 16 16"><path d="M3.2 8.4l3.1 3.1 6.5-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="icon-burger" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M4 12h15.2M13.5 5.5L20 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="icon-pin" viewBox="0 0 24 24"><path d="M12 21.5s7-6.8 7-12.3a7 7 0 1 0-14 0c0 5.5 7 12.3 7 12.3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9.2" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="icon-phone" viewBox="0 0 24 24"><path d="M6.6 3.5h3l1.4 4.4-2.2 1.7a12.6 12.6 0 0 0 5.6 5.6l1.7-2.2 4.4 1.4v3a1.5 1.5 0 0 1-1.6 1.5C10.8 18.4 5.6 13.2 5.1 5.1A1.5 1.5 0 0 1 6.6 3.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+<symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 7.3v5l3.4 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.6" cy="7.4" r="1" fill="currentColor"/></symbol>
+<symbol id="icon-star" viewBox="0 0 20 20"><path d="M10 1.5l2.5 5.4 5.8.6-4.4 3.9 1.3 5.7L10 14.2l-5.2 2.9 1.3-5.7-4.4-3.9 5.8-.6z" fill="currentColor"/></symbol>
+<symbol id="icon-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.2 8.8l-2 4.4-4.4 2 2-4.4z" fill="currentColor"/></symbol>
+<symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.6v2.5M12 18.9v2.5M4.3 4.3l1.8 1.8M17.9 17.9l1.8 1.8M2.6 12h2.5M18.9 12h2.5M4.3 19.7l1.8-1.8M17.9 6.1l1.8-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20.2 14.4A8.4 8.4 0 1 1 9.6 3.8a6.7 6.7 0 0 0 10.6 10.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+
+<symbol id="botanical-branch" viewBox="0 0 200 260">
+<path d="M100 250C86 190 80 120 100 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+<path d="M100 60c-22-6-38-24-40-46 24 4 40 22 44 44" fill="currentColor" opacity="0.9"/>
+<path d="M100 100c22-8 36-28 36-50-22 6-36 26-40 48" fill="currentColor" opacity="0.9"/>
+<path d="M100 140c-22-6-38-24-40-46 24 4 40 22 44 44" fill="currentColor" opacity="0.9"/>
+<path d="M100 180c22-8 36-28 36-50-22 6-36 26-40 48" fill="currentColor" opacity="0.9"/>
+<g fill="#a23b2b"><circle cx="66" cy="30" r="7"/><circle cx="80" cy="20" r="7"/><circle cx="132" cy="66" r="7"/><circle cx="146" cy="56" r="7"/><circle cx="66" cy="110" r="7"/><circle cx="80" cy="100" r="7"/><circle cx="132" cy="146" r="7"/><circle cx="146" cy="136" r="7"/></g>
+</symbol>
+
+<symbol id="botanical-leaf-large" viewBox="0 0 200 320">
+<path d="M100 10c60 40 84 120 60 200-18 60-60 96-60 110-0-14-42-50-60-110-24-80 0-160 60-200z" fill="currentColor" opacity="0.92"/>
+<path d="M100 30v270" fill="none" stroke="#fbf5e7" stroke-width="2" opacity="0.5"/>
+<path d="M100 60c-20 10-34 26-42 46M100 60c20 10 34 26 42 46M100 110c-22 8-38 26-46 48M100 110c22 8 38 26 46 48M100 160c-22 8-36 26-42 48M100 160c22 8 36 26 42 48M100 210c-18 8-30 22-36 40M100 210c18 8 30 22 36 40" fill="none" stroke="#fbf5e7" stroke-width="1.4" opacity="0.4" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="botanical-palm" viewBox="0 0 240 200">
+<path d="M120 190c-4-40 2-78 10-104" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+<g fill="currentColor" opacity="0.92"><path d="M130 86C110 66 78 58 40 62c26 18 54 26 90 30z"/><path d="M130 86c-28-8-56-4-88 10 30 8 58 6 88-10z"/><path d="M132 82c-6-30-24-54-56-70 8 34 26 56 56 70z"/><path d="M132 82c22-16 34-42 30-72-22 20-32 44-30 72z"/><path d="M134 84c26-4 48-20 62-46-30 4-52 20-62 46z"/></g>
+</symbol>
+
+<symbol id="botanical-sun" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="34" fill="currentColor"/>
+<g stroke="currentColor" stroke-width="6" stroke-linecap="round"><path d="M100 20v26M100 154v26M20 100h26M154 100h26"/><path d="M45 45l18 18M137 137l18 18M155 45l-18 18M63 137l-18 18"/></g>
+</symbol>
+
+<symbol id="botanical-beans" viewBox="0 0 200 120">
+<g fill="currentColor"><path d="M40 30c16-10 34-8 42 6s2 32-14 42-34 8-42-6-2-32 14-42z"/><path d="M110 24c16-10 34-8 42 6s2 32-14 42-34 8-42-6-2-32 14-42z"/><path d="M75 66c16-10 34-8 42 6s2 32-14 42-34 8-42-6-2-32 14-42z"/></g>
+<g stroke="#1c3a2a" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.55"><path d="M60 38c-6 12-6 24 0 34"/><path d="M130 32c-6 12-6 24 0 34"/><path d="M95 74c-6 12-6 24 0 34"/></g>
+</symbol>
+
+<symbol id="drink-cappuccino" viewBox="0 0 200 200">
+<path d="M52 92h84l-8 52c-2 14-14 24-30 24h-8c-16 0-28-10-30-24z" fill="#eee0c3"/><ellipse cx="94" cy="92" rx="42" ry="10" fill="#fbf5e7"/>
+<path d="M94 84c-14-6-16-18-6-26 4 8 12 12 20 10-2-10 4-18 14-20-2 10 2 16 10 18 8-4 10-12 6-20 10 4 14 16 8 24-8 10-22 12-32 12s-16 0-20 2z" fill="currentColor" opacity="0.9"/>
+<path d="M136 100c14-2 26 6 26 18s-12 20-26 18" fill="none" stroke="#eee0c3" stroke-width="7" stroke-linecap="round"/>
+<path d="M60 68c0-8 4-14 4-14M78 62c0-8 4-16 4-16M96 62c0-8 4-16 4-16" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" opacity="0.55"/>
+</symbol>
+
+<symbol id="drink-latte" viewBox="0 0 200 200">
+<path d="M60 60h72l-6 90c-1 16-15 28-30 28s-29-12-30-28z" fill="#eee0c3"/><ellipse cx="96" cy="60" rx="36" ry="9" fill="#fbf5e7"/>
+<path d="M96 52c-16 2-26-6-24-16 8 4 16 4 22-2 2 10 10 14 20 12 4-8-2-16-10-18 12-2 22 6 20 16-3 10-16 12-28 8z" fill="currentColor" opacity="0.88"/>
+<path d="M62 40c0-10 5-18 5-18M82 34c0-10 5-20 5-20M102 34c0-10 5-20 5-20" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" opacity="0.5"/>
+</symbol>
+
+<symbol id="drink-espresso" viewBox="0 0 200 200">
+<ellipse cx="100" cy="150" rx="52" ry="10" fill="#e1cda0"/><path d="M68 92h64l-6 40c-2 12-13 20-26 20s-24-8-26-20z" fill="#eee0c3"/><ellipse cx="100" cy="92" rx="32" ry="8" fill="#fbf5e7"/>
+<path d="M132 100c12-2 22 5 22 15s-10 17-22 15" fill="none" stroke="#eee0c3" stroke-width="6" stroke-linecap="round"/>
+<circle cx="100" cy="88" r="20" fill="currentColor" opacity="0.85"/>
+<path d="M78 58c0-8 3-13 3-13M96 54c0-8 3-15 3-15M112 58c0-8 3-13 3-13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+</symbol>
+
+<symbol id="drink-coldbrew" viewBox="0 0 200 200">
+<path d="M64 46h72l-10 128c-1 10-9 18-19 18h-14c-10 0-18-8-19-18z" fill="#eee0c3" opacity="0.35"/>
+<path d="M64 46h72l-9 116H73z" fill="currentColor" opacity="0.9"/>
+<g fill="#fbf5e7" opacity="0.85"><rect x="76" y="60" width="14" height="16" rx="3" transform="rotate(8 83 68)"/><rect x="98" y="70" width="14" height="16" rx="3" transform="rotate(-6 105 78)"/><rect x="112" y="96" width="14" height="16" rx="3" transform="rotate(10 119 104)"/><rect x="80" y="100" width="14" height="16" rx="3" transform="rotate(-8 87 108)"/></g>
+<rect x="58" y="34" width="84" height="14" rx="7" fill="#eee0c3"/><path d="M92 34V16M108 34V16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="drink-coconut" viewBox="0 0 200 200">
+<path d="M62 60h76l-8 108c-1 12-11 20-22 20h-16c-11 0-21-8-22-20z" fill="#eee0c3" opacity="0.4"/><path d="M62 60h76l-7 96H69z" fill="currentColor" opacity="0.85"/>
+<path d="M100 60c-16-4-28-18-26-34 12 4 22 16 26 34z" fill="#fbf5e7"/><path d="M100 60c14-8 20-24 14-38-10 8-16 22-14 38z" fill="#eee0c3"/>
+<path d="M60 44l16 24" stroke="#fbf5e7" stroke-width="6" stroke-linecap="round"/>
+<g fill="#fbf5e7" opacity="0.85"><rect x="78" y="86" width="13" height="15" rx="3"/><rect x="100" y="98" width="13" height="15" rx="3"/><rect x="86" y="118" width="13" height="15" rx="3"/></g>
+</symbol>
+
+<symbol id="drink-raf" viewBox="0 0 200 200">
+<path d="M58 78h68l-6 76c-1 12-12 22-24 22h-8c-12 0-23-10-24-22z" fill="#eee0c3"/><ellipse cx="92" cy="78" rx="34" ry="8" fill="#fbf5e7"/>
+<g fill="currentColor" opacity="0.88"><circle cx="76" cy="70" r="15"/><circle cx="94" cy="61" r="18"/><circle cx="113" cy="70" r="15"/></g>
+<path d="M126 88c12-2 22 5 22 15s-10 17-22 15" fill="none" stroke="#eee0c3" stroke-width="6" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="drink-filter" viewBox="0 0 200 200">
+<path d="M56 50h88l-38 66v40h-12v-40z" fill="currentColor" opacity="0.85"/><ellipse cx="100" cy="50" rx="44" ry="9" fill="#eee0c3"/>
+<rect x="72" y="150" width="56" height="14" rx="4" fill="#eee0c3"/><path d="M76 62c8 14 16 24 24 30" fill="none" stroke="#fbf5e7" stroke-width="2.4" opacity="0.6" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="pastry-croissant" viewBox="0 0 200 140">
+<path d="M20 90c10-40 46-64 84-56 30 6 52 30 56 56-14-18-34-28-58-26-8 20-24 30-42 26-16 20-30 20-40 0z" fill="currentColor" opacity="0.9"/>
+<path d="M40 70c14-24 40-38 66-34M56 92c14-18 34-24 54-18M32 82c8-14 20-24 34-28" fill="none" stroke="#fbf5e7" stroke-width="2.6" opacity="0.55" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="pastry-cheesecake" viewBox="0 0 200 160">
+<path d="M34 146L98 46q2-4 6-4t6 4l62 100z" fill="#eee0c3" opacity="0.35"/>
+<path d="M42 144L100 54q1.6-3 4-3t4 3l58 90z" fill="currentColor" opacity="0.9"/>
+<path d="M42 144h122l-10-24H52z" fill="currentColor" opacity="0.6"/>
+<path d="M42 144h122l-4-9H46z" fill="#8a6a3a" opacity="0.55"/>
+<g fill="#a23b2b"><circle cx="98" cy="52" r="8"/><circle cx="114" cy="60" r="6"/></g>
+<path d="M84 66c6-6 14-8 22-4" fill="none" stroke="#fbf5e7" stroke-width="2.6" opacity="0.6" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="pastry-cinnabon" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="66" fill="currentColor" opacity="0.9"/>
+<path d="M100 100c14 0 25 9 25 22s-13 24-28 24c-17 0-32-13-32-31 0-20 17-36 38-36 23 0 42 18 42 42 0 25-21 45-48 45-28 0-52-23-52-53" fill="none" stroke="#eee0c3" stroke-width="6" stroke-linecap="round"/>
+<circle cx="100" cy="100" r="4.5" fill="#eee0c3"/>
+<path d="M52 82c6-14 18-26 30-30M148 118c-6 14-18 26-30 30" fill="none" stroke="#a23b2b" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+</symbol>
+
+<symbol id="pastry-cookie" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="64" fill="currentColor" opacity="0.9"/>
+<g fill="#1c3a2a" opacity="0.85"><circle cx="76" cy="76" r="7"/><circle cx="122" cy="82" r="6"/><circle cx="100" cy="106" r="7"/><circle cx="70" cy="118" r="5.5"/><circle cx="128" cy="122" r="7"/><circle cx="104" cy="140" r="5.5"/></g>
+</symbol>
+
+<symbol id="pastry-eclair" viewBox="0 0 200 120">
+<rect x="24" y="46" width="152" height="46" rx="23" fill="currentColor" opacity="0.9"/>
+<path d="M30 40c20-8 40 8 60 0s40-8 60 0 20 8 20 8-14 8-20 8-40-8-60 0-40 8-60 0-20-8-20-8 0 0 20-8z" fill="#a23b2b" opacity="0.9"/>
+</symbol>
+
+<symbol id="whyus-roast" viewBox="0 0 100 100"><path d="M30 44c0-13 9-24 20-24s20 11 20 24-9 24-20 24-20-11-20-24z" fill="none" stroke="currentColor" stroke-width="4.5"/><path d="M50 23c-6 8-6 34 0 42" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M31 76c2-5 7-5 9 0M45 78c2-5 7-5 9 0M59 76c2-5 7-5 9 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="whyus-pastry" viewBox="0 0 100 100"><path d="M20 62c8-22 24-34 30-34s22 12 30 34c-8 6-18 8-30 8s-22-2-30-8z" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/><path d="M16 70h68" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M40 40c2-6 6-10 10-12M52 40c-1-6 1-11 4-14" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="whyus-signature" viewBox="0 0 100 100"><path d="M30 44h34l-4 26c-1 8-8 14-16 14h-4c-8 0-15-6-16-14z" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/><path d="M64 50c8-2 14 3 14 10s-6 12-14 10" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M40 26l6 6M52 22l4 8M64 28l-4 6" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="whyus-atmosphere" viewBox="0 0 100 100"><path d="M22 78V52c0-11 9-20 20-20h16c11 0 20 9 20 20v26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/><path d="M18 78h64M26 78V64M74 78V64" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M38 44h24v14H38z" fill="none" stroke="currentColor" stroke-width="3.5"/></symbol>
+</svg>
+</div>
+
+<!-- ============================================================
+     Header
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-row">
+    <a href="#top" class="brand-mark" aria-label="TT Roaster — на главную">
+      <picture><source srcset="assets/img/emblem-real.webp" type="image/webp"><img class="brand-mark__emblem" src="assets/img/emblem-real.jpg" alt="" loading="eager"></picture>
+      <span class="brand-mark__type">
+        <span class="brand-mark__kicker">Tropical Travel</span>
+        <span class="brand-mark__name">TT Roaster</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a class="main-nav__link" href="#about" data-i18n="nav.about">О нас</a>
+      <a class="main-nav__link" href="#menu" data-i18n="nav.menu">Меню</a>
+      <a class="main-nav__link" href="#signature" data-i18n="nav.signature">Авторские</a>
+      <a class="main-nav__link" href="#atmosphere" data-i18n="nav.atmosphere">Атмосфера</a>
+      <a class="main-nav__link" href="#contacts" data-i18n="nav.contacts">Контакты</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Тёмная тема">
+        <svg class="theme-toggle__glyph" viewBox="0 0 24 24" aria-hidden="true">
+          <mask id="themeToggleMask">
+            <rect x="0" y="0" width="24" height="24" fill="#fff"/>
+            <circle class="theme-toggle__cutout" cx="17.5" cy="7" r="6"/>
+          </mask>
+          <circle class="theme-toggle__disc" cx="12" cy="12" r="5.2" mask="url(#themeToggleMask)"/>
+          <g class="theme-toggle__rays">
+            <line x1="12" y1="1.8" x2="12" y2="4.4"/>
+            <line x1="12" y1="19.6" x2="12" y2="22.2"/>
+            <line x1="1.8" y1="12" x2="4.4" y2="12"/>
+            <line x1="19.6" y1="12" x2="22.2" y2="12"/>
+            <line x1="4.6" y1="4.6" x2="6.4" y2="6.4"/>
+            <line x1="17.6" y1="17.6" x2="19.4" y2="19.4"/>
+            <line x1="4.6" y1="19.4" x2="6.4" y2="17.6"/>
+            <line x1="17.6" y1="6.4" x2="19.4" y2="4.6"/>
+          </g>
+        </svg>
+      </button>
+      <div class="lang-switch" id="langSwitch" data-open="false">
+        <button class="lang-switch__btn" id="langSwitchBtn" aria-haspopup="listbox" aria-expanded="false">
+          <span id="langSwitchLabel">RU</span>
+          <svg><use href="#icon-chevron-down"/></svg>
+        </button>
+        <div class="lang-switch__menu" role="listbox" id="langSwitchMenu">
+          <button class="lang-switch__option" role="option" data-lang="ru" aria-checked="true">
+            <span>Русский</span><svg class="lang-switch__option-tick"><use href="#icon-check"/></svg>
+          </button>
+          <button class="lang-switch__option" role="option" data-lang="en" aria-checked="false">
+            <span>English</span><svg class="lang-switch__option-tick"><use href="#icon-check"/></svg>
+          </button>
+          <button class="lang-switch__option" role="option" data-lang="ar" aria-checked="false">
+            <span>العربية</span><svg class="lang-switch__option-tick"><use href="#icon-check"/></svg>
+          </button>
+        </div>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Меню" data-i18n-attr="aria-label:common.menuLabel" aria-expanded="false">
+        <svg class="icon-burger"><use href="#icon-burger"/></svg>
+        <svg class="icon-close"><use href="#icon-close"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="Мобильная навигация">
+  <a class="mobile-nav__link" href="#about" data-i18n="nav.about">О нас</a>
+  <a class="mobile-nav__link" href="#menu" data-i18n="nav.menu">Меню</a>
+  <a class="mobile-nav__link" href="#signature" data-i18n="nav.signature">Авторские</a>
+  <a class="mobile-nav__link" href="#atmosphere" data-i18n="nav.atmosphere">Атмосфера</a>
+  <a class="mobile-nav__link" href="#contacts" data-i18n="nav.contacts">Контакты</a>
+  <div class="mobile-nav__foot">
+    <a href="tel:+79387833000">+7 938 783-30-00</a>
+    <a href="https://instagram.com/tt.roaster" target="_blank" rel="noopener">@tt.roaster</a>
+  </div>
+</nav>
+
+<main id="top">
+<!-- ============================================================
+     1. HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <picture><source srcset="assets/video/hero-coffee-wide-poster.webp" type="image/webp"><img class="hero-poster" src="assets/video/hero-coffee-wide-poster.jpg" alt="" id="heroPoster"></picture>
+    <video class="hero-video is-a" id="heroVideoA" muted playsinline autoplay preload="auto" aria-hidden="true">
+      <source src="assets/video/hero-coffee-wide-mobile.webm" type="video/webm" media="(max-width: 900px)">
+      <source src="assets/video/hero-coffee-wide-mobile.mp4" type="video/mp4" media="(max-width: 900px)">
+      <source src="assets/video/hero-coffee-wide.webm" type="video/webm">
+      <source src="assets/video/hero-coffee-wide.mp4" type="video/mp4">
+    </video>
+    <video class="hero-video is-b" id="heroVideoB" muted playsinline preload="none" aria-hidden="true">
+      <source src="assets/video/hero-coffee-wide-mobile.webm" type="video/webm" media="(max-width: 900px)">
+      <source src="assets/video/hero-coffee-wide-mobile.mp4" type="video/mp4" media="(max-width: 900px)">
+      <source src="assets/video/hero-coffee-wide.webm" type="video/webm">
+      <source src="assets/video/hero-coffee-wide.mp4" type="video/mp4">
+    </video>
+    <div class="hero-grain"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-inner">
+        <span class="kicker hero-kicker"><span class="eyebrow-line"></span><span data-i18n="hero.kicker">Tropical Travel · Буйнакск</span></span>
+        <h1 class="heading-xl hero-title" data-i18n="hero.title">Ваше место<br>для хорошего кофе</h1>
+        <p class="hero-lede" data-i18n="hero.lede">Свежесваренный кофе, авторские напитки и уютная атмосфера для каждого дня.</p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn--terracotta">
+            <span data-i18n="hero.cta1">Посмотреть меню</span>
+            <svg class="icon-flip"><use href="#icon-arrow-right"/></svg>
+          </a>
+          <a href="#contacts" class="btn btn--outline">
+            <span data-i18n="hero.cta2">Найти нас</span>
+            <svg><use href="#icon-pin"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-cue" aria-hidden="true">
+    <span data-i18n="hero.scroll">Листайте</span>
+    <span class="hero-scroll-cue__line"></span>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. О КОФЕЙНЕ
+     ============================================================ -->
+<section class="about" id="about">
+  <svg class="deco-leaf deco-leaf--about-bg"><use href="#botanical-leaf-large"/></svg>
+  <div class="container about-grid">
+    <div class="about-copy" data-reveal>
+      <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="about.kicker">О кофейне</span></span>
+      <h2 class="heading-lg" data-i18n="about.title">Кофе, встречи и немного<br>времени для себя.</h2>
+      <p data-i18n="about.body">ТТ Ростер — кофейня и своя обжарочная в Буйнакске. Мы сами обжариваем зерно, готовим авторские напитки и создаём место, куда легко зайти на пять минут — и остаться на час.</p>
+      <a href="#menu" class="btn btn--outline-dark">
+        <span data-i18n="about.cta">Смотреть меню</span>
+        <svg class="icon-flip"><use href="#icon-arrow-right"/></svg>
+      </a>
+
+      <div class="about-stats">
+        <div class="about-stat">
+          <strong>5.0★</strong>
+          <span data-i18n="about.stat1">Рейтинг Яндекс Карт</span>
+        </div>
+        <div class="about-stat">
+          <strong>3 264</strong>
+          <span data-i18n="about.stat2">Подписчиков в Instagram</span>
+        </div>
+        <div class="about-stat">
+          <strong>7:30–00:00</strong>
+          <span data-i18n="about.stat3">Открыты ежедневно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-visual" data-reveal style="--reveal-delay:120ms">
+      <svg class="about-leaf"><use href="#botanical-branch"/></svg>
+      <div class="about-photo-frame">
+        <picture><source srcset="assets/img/facade-crop.webp" type="image/webp"><img src="assets/img/facade-crop.jpg" alt="Фасад TT Roaster вечером" data-i18n-attr="alt:about.photoAlt" loading="lazy" data-reveal="zoom" style="--reveal-delay:150ms"></picture>
+      </div>
+      <picture><source srcset="assets/img/emblem-real.webp" type="image/webp"><img class="about-badge" src="assets/img/emblem-real.jpg" alt="Эмблема TT Roaster — Feel a taste of tropical travel" data-i18n-attr="alt:about.emblemAlt" loading="lazy"></picture>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. КОФЕ / МЕНЮ
+     ============================================================ -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-row">
+        <div>
+          <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="menu.kicker">Кофе</span></span>
+          <h2 class="heading-lg" data-i18n="menu.title">Меню</h2>
+        </div>
+        <button class="btn btn--outline" id="openMenuModalTop">
+          <span data-i18n="menu.cta">Полное меню</span>
+          <svg class="icon-flip"><use href="#icon-arrow-right"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="menu-strip">
+      <article class="menu-item" data-reveal style="--reveal-delay:0ms">
+        <div class="menu-item__art menu-item__art--photo"><picture><source srcset="assets/img/menu/cappuccino.webp" type="image/webp"><img src="assets/img/menu/cappuccino.jpg" alt="" loading="lazy"></picture></div>
+        <h3 class="menu-item__name" data-i18n="menu.item1.name">Капучино</h3>
+        <p class="menu-item__desc" data-i18n="menu.item1.desc">Эспрессо и бархатная молочная пена</p>
+        <span class="menu-item__price">190 ₽</span>
+      </article>
+      <article class="menu-item" data-reveal style="--reveal-delay:80ms">
+        <div class="menu-item__art menu-item__art--photo"><picture><source srcset="assets/img/menu/latte.webp" type="image/webp"><img src="assets/img/menu/latte.jpg" alt="" loading="lazy"></picture></div>
+        <h3 class="menu-item__name" data-i18n="menu.item2.name">Латте</h3>
+        <p class="menu-item__desc" data-i18n="menu.item2.desc">Мягкий эспрессо с большим количеством молока</p>
+        <span class="menu-item__price">200 ₽</span>
+      </article>
+      <article class="menu-item" data-reveal style="--reveal-delay:160ms">
+        <div class="menu-item__art menu-item__art--photo"><picture><source srcset="assets/img/menu/raf.webp" type="image/webp"><img src="assets/img/menu/raf.jpg" alt="" loading="lazy"></picture></div>
+        <h3 class="menu-item__name" data-i18n="menu.item3.name">Раф</h3>
+        <p class="menu-item__desc" data-i18n="menu.item3.desc">Сливочный раф на топлёных сливках</p>
+        <span class="menu-item__price">240 ₽</span>
+      </article>
+      <article class="menu-item" data-reveal style="--reveal-delay:240ms">
+        <div class="menu-item__art menu-item__art--photo"><picture><source srcset="assets/img/menu/coconut-icelatte.webp" type="image/webp"><img src="assets/img/menu/coconut-icelatte.jpg" alt="" loading="lazy"></picture></div>
+        <h3 class="menu-item__name" data-i18n="menu.item4.name">Айс-латте кокосовый</h3>
+        <p class="menu-item__desc" data-i18n="menu.item4.desc">Эспрессо, кокосовое молоко и лёд</p>
+        <span class="menu-item__price">300 ₽</span>
+      </article>
+    </div>
+
+    <div class="menu-cta-row">
+      <button class="btn btn--terracotta" id="openMenuModalBottom">
+        <span data-i18n="menu.cta">Полное меню</span>
+        <svg class="icon-flip"><use href="#icon-arrow-right"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. АВТОРСКИЕ НАПИТКИ
+     ============================================================ -->
+<section class="signature" id="signature">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="signature.kicker">Фирменное</span></span>
+      <h2 class="heading-lg" data-i18n="signature.title">Авторские напитки</h2>
+      <p data-i18n="signature.lede">Напитки, которых нет больше нигде в городе — придуманы и собраны нашей командой.</p>
+    </div>
+
+    <div class="signature-list">
+      <article class="signature-item" data-reveal>
+        <div class="signature-item__art">
+          <div class="signature-item__art-inner signature-item__art-inner--photo">
+            <span class="signature-item__index">01</span>
+            <picture><source srcset="assets/img/menu/coldbrew.webp" type="image/webp"><img src="assets/img/menu/coldbrew.jpg" alt="" loading="lazy"></picture>
+          </div>
+        </div>
+        <div class="signature-item__copy">
+          <h3 class="signature-item__name" data-i18n="signature.item1.name">Колд брю</h3>
+          <p class="signature-item__desc" data-i18n="signature.item1.desc">Медленный настой на фильтрованной воде — долгие часы при низкой температуре. Мягкий вкус без горечи, с нотами какао и цитруса.</p>
+          <div class="signature-item__meta">
+            <span class="signature-item__price">200 ₽</span>
+            <span class="signature-item__tag" data-i18n="signature.item1.tag">Хит</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="signature-item" data-reveal>
+        <div class="signature-item__art">
+          <div class="signature-item__art-inner signature-item__art-inner--photo">
+            <span class="signature-item__index">02</span>
+            <picture><source srcset="assets/img/menu/coconut-icelatte.webp" type="image/webp"><img src="assets/img/menu/coconut-icelatte.jpg" alt="" loading="lazy"></picture>
+          </div>
+        </div>
+        <div class="signature-item__copy">
+          <h3 class="signature-item__name" data-i18n="signature.item2.name">Айс-латте кокосовый</h3>
+          <p class="signature-item__desc" data-i18n="signature.item2.desc">Эспрессо, кокосовое молоко и лёд — вкус тропического побережья в каждом глотке.</p>
+          <div class="signature-item__meta">
+            <span class="signature-item__price">300 ₽</span>
+            <span class="signature-item__tag" data-i18n="signature.item2.tag">Тропики</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="signature-item" data-reveal>
+        <div class="signature-item__art">
+          <div class="signature-item__art-inner signature-item__art-inner--photo">
+            <span class="signature-item__index">03</span>
+            <picture><source srcset="assets/img/menu/urbech-ice.webp" type="image/webp"><img src="assets/img/menu/urbech-ice.jpg" alt="" loading="lazy"></picture>
+          </div>
+        </div>
+        <div class="signature-item__copy">
+          <h3 class="signature-item__name" data-i18n="signature.item3.name">Урбечный айс</h3>
+          <p class="signature-item__desc" data-i18n="signature.item3.desc">Холодный напиток с местным урбечом — густой, ореховый и по-настоящему дагестанский.</p>
+          <div class="signature-item__meta">
+            <span class="signature-item__price">300 ₽</span>
+            <span class="signature-item__tag" data-i18n="signature.item3.tag">Авторский</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="signature-item" data-reveal>
+        <div class="signature-item__art">
+          <div class="signature-item__art-inner signature-item__art-inner--photo">
+            <span class="signature-item__index">04</span>
+            <picture><source srcset="assets/img/menu/blue-lagoon.webp" type="image/webp"><img src="assets/img/menu/blue-lagoon.jpg" alt="" loading="lazy"></picture>
+          </div>
+        </div>
+        <div class="signature-item__copy">
+          <h3 class="signature-item__name" data-i18n="signature.item4.name">Голубая лагуна</h3>
+          <p class="signature-item__desc" data-i18n="signature.item4.desc">Освежающий лимонад цвета тропического моря — с прохладной цитрусовой кислинкой.</p>
+          <div class="signature-item__meta">
+            <span class="signature-item__price">190 ₽</span>
+            <span class="signature-item__tag" data-i18n="signature.item4.tag">Лето</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. ВЫПЕЧКА И ДЕСЕРТЫ
+     ============================================================ -->
+<section class="bakery beans" id="beans">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="beans.kicker">Своя обжарка</span></span>
+      <h2 class="heading-lg" data-i18n="beans.title">Кофе в зёрнах</h2>
+      <p class="beans-lede" data-i18n="beans.lede">Обжариваем сами. Бразилия «Феникс» — молочный шоколад, урбеч и сладость сухофруктов. Натуральная обработка, высота 600–1000 м. Берите домой.</p>
+    </div>
+
+    <div class="beans-grid">
+      <article class="beans-card" data-reveal style="--reveal-delay:0ms">
+        <div class="beans-card__photo"><picture><source srcset="assets/img/beans/brazil-250.webp" type="image/webp"><img src="assets/img/beans/brazil-250.jpg" alt="Кофе в зёрнах Бразилия, 0,25 кг" data-i18n-attr="alt:beans.item1.alt" loading="lazy"></picture></div>
+        <div class="beans-card__body">
+          <h3 class="beans-card__name" data-i18n="beans.item1.name">Бразилия, свежая обжарка</h3>
+          <p class="beans-card__notes" data-i18n="beans.item1.notes">Молочный шоколад · урбеч · сухофрукты</p>
+          <div class="beans-card__meta">
+            <span class="beans-card__weight" data-i18n="beans.item1.weight">0,25 кг</span>
+            <span class="beans-card__price">650 ₽</span>
+          </div>
+        </div>
+      </article>
+      <article class="beans-card" data-reveal style="--reveal-delay:120ms">
+        <div class="beans-card__photo"><picture><source srcset="assets/img/beans/brazil-1kg.webp" type="image/webp"><img src="assets/img/beans/brazil-1kg.jpg" alt="Кофе в зёрнах Бразилия, 1 кг" data-i18n-attr="alt:beans.item2.alt" loading="lazy"></picture></div>
+        <div class="beans-card__body">
+          <h3 class="beans-card__name" data-i18n="beans.item2.name">Бразилия, свежая обжарка</h3>
+          <p class="beans-card__notes" data-i18n="beans.item2.notes">Молочный шоколад · орех · сухофрукты</p>
+          <div class="beans-card__meta">
+            <span class="beans-card__weight" data-i18n="beans.item2.weight">1 кг</span>
+            <span class="beans-card__price">2 000 ₽</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. АТМОСФЕРА
+     ============================================================ -->
+<section class="atmosphere" id="atmosphere">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="atmosphere.kicker">Атмосфера</span></span>
+      <h2 class="heading-lg" data-i18n="atmosphere.title">Здесь можно никуда<br>не спешить.</h2>
+    </div>
+
+    <div class="atmosphere-grid">
+      <div class="atmosphere-tile t1" data-reveal>
+        <picture><source srcset="assets/img/facade-crop-wide.webp" type="image/webp"><img src="assets/img/facade-crop-wide.jpg" alt="Фасад TT Roaster" loading="lazy"></picture>
+        <span class="atmosphere-tile__label" data-i18n="atmosphere.tile1">ТТ Ростер · Фасад</span>
+      </div>
+      <div class="atmosphere-tile t2" data-reveal style="--reveal-delay:60ms">
+        <picture><source srcset="assets/img/gallery/barista.webp" type="image/webp"><img src="assets/img/gallery/barista.jpg" alt="Бариста за стойкой" loading="lazy"></picture>
+        <span class="atmosphere-tile__label" data-i18n="atmosphere.tile2">За стойкой</span>
+      </div>
+      <div class="atmosphere-tile t3" data-reveal style="--reveal-delay:120ms">
+        <picture><source srcset="assets/img/gallery/cafe-plants.webp" type="image/webp"><img src="assets/img/gallery/cafe-plants.jpg" alt="Интерьер кофейни с зеленью" loading="lazy"></picture>
+        <span class="atmosphere-tile__label" data-i18n="atmosphere.tile3">Зелёный уголок</span>
+      </div>
+      <div class="atmosphere-tile t4" data-reveal>
+        <picture><source srcset="assets/img/gallery/roaster.webp" type="image/webp"><img src="assets/img/gallery/roaster.jpg" alt="Зёрна своей обжарки TT Roaster" loading="lazy"></picture>
+        <span class="atmosphere-tile__label" data-i18n="atmosphere.tile4">Своя обжарка</span>
+      </div>
+      <div class="atmosphere-tile t5" data-reveal style="--reveal-delay:80ms">
+        <picture><source srcset="assets/img/gallery/togo-cups.webp" type="image/webp"><img src="assets/img/gallery/togo-cups.jpg" alt="Уютный зал кофейни" loading="lazy"></picture>
+        <span class="atmosphere-tile__label" data-i18n="atmosphere.tile5">Уютный зал</span>
+      </div>
+      <div class="atmosphere-tile t6" data-reveal style="--reveal-delay:160ms">
+        <picture><source srcset="assets/img/gallery/latte-cinnamon.webp" type="image/webp"><img src="assets/img/gallery/latte-cinnamon.jpg" alt="Уютное место у окна" loading="lazy"></picture>
+        <span class="atmosphere-tile__label" data-i18n="atmosphere.tile6">Медленное утро</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. ПОЧЕМУ МЫ
+     ============================================================ -->
+<section class="why-us" id="why-us">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="whyus.kicker">Почему мы</span></span>
+      <h2 class="heading-lg" data-i18n="whyus.title">Четыре причины зайти</h2>
+    </div>
+
+    <div class="why-list">
+      <div class="why-row" data-reveal>
+        <span class="why-row__num">01</span>
+        <div class="why-row__text">
+          <h3 class="why-row__title" data-i18n="whyus.item1.title">Своя обжарка</h3>
+          <p class="why-row__desc" data-i18n="whyus.item1.desc">Обжариваем зерно сами — от бразильских плантаций до вашей чашки.</p>
+        </div>
+        <span class="why-row__icon"><svg><use href="#whyus-roast"/></svg></span>
+      </div>
+      <div class="why-row" data-reveal style="--reveal-delay:60ms">
+        <span class="why-row__num">02</span>
+        <div class="why-row__text">
+          <h3 class="why-row__title" data-i18n="whyus.item2.title">Кофе навынос</h3>
+          <p class="why-row__desc" data-i18n="whyus.item2.desc">Готовим кофе с собой — быстро и всегда свежим.</p>
+        </div>
+        <span class="why-row__icon"><svg><use href="#whyus-signature"/></svg></span>
+      </div>
+      <div class="why-row" data-reveal style="--reveal-delay:120ms">
+        <span class="why-row__num">03</span>
+        <div class="why-row__text">
+          <h3 class="why-row__title" data-i18n="whyus.item3.title">Авторские напитки</h3>
+          <p class="why-row__desc" data-i18n="whyus.item3.desc">Колдбрю, раф и кокосовый айс-латте — таких сочетаний больше нет в городе.</p>
+        </div>
+        <span class="why-row__icon"><svg><use href="#whyus-signature"/></svg></span>
+      </div>
+      <div class="why-row" data-reveal style="--reveal-delay:180ms">
+        <span class="why-row__num">04</span>
+        <div class="why-row__text">
+          <h3 class="why-row__title" data-i18n="whyus.item4.title">Атмосфера путешествия</h3>
+          <p class="why-row__desc" data-i18n="whyus.item4.desc">Интерьер и подача — привет из тропиков, а не типовая кофейня.</p>
+        </div>
+        <span class="why-row__icon"><svg><use href="#whyus-atmosphere"/></svg></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. ОТЗЫВЫ
+     ============================================================ -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-row">
+        <div>
+          <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="reviews.kicker">Отзывы</span></span>
+          <h2 class="heading-lg" data-i18n="reviews.title">Нам доверяют</h2>
+        </div>
+        <div class="reviews-rating">
+          <span class="reviews-rating__stars">
+            <svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg>
+          </span>
+          <span class="reviews-rating__text">
+            <strong>5.0</strong>
+            <span data-i18n="reviews.count">211 оценок на Яндекс Картах</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-track">
+      <article class="review-card">
+        <span class="review-card__stars"><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg></span>
+        <p class="review-card__quote" data-i18n="reviews.item1.quote">«Одна из топовых кофеен в Буйнакске. Рекомендую в жаркую погоду попробовать тут айс кофе. Молочные коктейли тоже чёткие».</p>
+        <div class="review-card__foot"><span class="review-card__name">Kaplan</span><span class="review-card__source" data-i18n="reviews.source">Яндекс Карты</span></div>
+      </article>
+      <article class="review-card">
+        <span class="review-card__stars"><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg></span>
+        <p class="review-card__quote" data-i18n="reviews.item2.quote">«Среди кофеен в Дагестане она одна из топовых. Сервис, оплата картой, собственная обжарка зёрен, баристы знают толк в кофе, демократичные цены, атмосфера на уровне».</p>
+        <div class="review-card__foot"><span class="review-card__name">Шамиль Я.</span><span class="review-card__source" data-i18n="reviews.source">Яндекс Карты</span></div>
+      </article>
+      <article class="review-card">
+        <span class="review-card__stars"><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg></span>
+        <p class="review-card__quote" data-i18n="reviews.item3.quote">«Прямо сейчас сижу в этой кофейне и не терпится похвалить данное заведение. Обслуживание, вкус, дизайн интерьера — на высшем уровне! Давно не сидел в таких приятных местах».</p>
+        <div class="review-card__foot"><span class="review-card__name">Имам Исупанов</span><span class="review-card__source" data-i18n="reviews.source">Яндекс Карты</span></div>
+      </article>
+      <article class="review-card">
+        <span class="review-card__stars"><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg></span>
+        <p class="review-card__quote" data-i18n="reviews.item4.quote">«Прекрасное место».</p>
+        <div class="review-card__foot"><span class="review-card__name">Фатима Алисолтанова</span><span class="review-card__source" data-i18n="reviews.source">Яндекс Карты</span></div>
+      </article>
+      <article class="review-card">
+        <span class="review-card__stars"><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg><svg><use href="#icon-star"/></svg></span>
+        <p class="review-card__quote" data-i18n="reviews.item5.quote">«Самый лучший кофе, который я пил!»</p>
+        <div class="review-card__foot"><span class="review-card__name">Алексей Карташов</span><span class="review-card__source" data-i18n="reviews.source">Яндекс Карты</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     9. ФИНАЛЬНЫЙ CTA
+     ============================================================ -->
+<section class="final-cta" id="visit">
+  <div class="final-cta__media" data-parallax data-parallax-mode="through" data-parallax-max="1.14">
+    <picture><source srcset="assets/img/cta-facade.webp" type="image/webp"><img src="assets/img/cta-facade.jpg" alt="Фасад TT Roaster" loading="lazy"></picture>
+  </div>
+  <div class="container final-cta-inner">
+    <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="finalcta.kicker">Ждём вас</span></span>
+    <h2 class="heading-xl" data-i18n="finalcta.title">Загляните на чашку кофе.</h2>
+    <div class="final-cta-actions">
+      <a href="https://yandex.ru/maps/-/CTD2j69A" target="_blank" rel="noopener" class="btn btn--terracotta">
+        <span data-i18n="finalcta.cta">Построить маршрут</span>
+        <svg><use href="#icon-compass"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     10. КОНТАКТЫ
+     ============================================================ -->
+<section class="contacts" id="contacts">
+  <div class="container contacts-grid">
+    <div class="contacts-copy" data-reveal>
+      <span class="kicker"><span class="eyebrow-line"></span><span data-i18n="contacts.kicker">Контакты</span></span>
+      <h2 class="heading-lg" data-i18n="contacts.title">Найти нас легко.</h2>
+
+      <div class="contact-list">
+        <div class="contact-row">
+          <span class="contact-row__icon"><svg><use href="#icon-pin"/></svg></span>
+          <div>
+            <div class="contact-row__label" data-i18n="contacts.addressLabel">Адрес</div>
+            <a class="contact-row__value" href="https://yandex.ru/maps/-/CTD2j69A" target="_blank" rel="noopener" data-i18n="contacts.addressValue">ул. Имама Гази-Магомеда, 37А, Буйнакск, Дагестан</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row__icon"><svg><use href="#icon-phone"/></svg></span>
+          <div>
+            <div class="contact-row__label" data-i18n="contacts.phoneLabel">Телефон</div>
+            <a class="contact-row__value" href="tel:+79387833000">+7 938 783-30-00</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-row__icon"><svg><use href="#icon-clock"/></svg></span>
+          <div>
+            <div class="contact-row__label" data-i18n="contacts.hoursLabel">Часы работы</div>
+            <span class="contact-row__value" data-i18n="contacts.hoursValue">Ежедневно, 7:30–00:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contacts-social">
+        <a href="https://instagram.com/tt.roaster" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+        <a href="https://yandex.ru/maps/-/CTD2j69A" target="_blank" rel="noopener" aria-label="Яндекс Карты"><svg><use href="#icon-pin"/></svg></a>
+      </div>
+
+      <a href="https://yandex.ru/maps/-/CTD2j69A" target="_blank" rel="noopener" class="btn btn--terracotta contacts-route-btn">
+        <span data-i18n="finalcta.cta">Построить маршрут</span>
+        <svg><use href="#icon-compass"/></svg>
+      </a>
+    </div>
+
+    <div class="contacts-map" data-reveal style="--reveal-delay:120ms">
+      <div class="contacts-map__fallback">
+        <span class="contacts-map__pulse"></span>
+        <svg><use href="#icon-pin"/></svg>
+        <strong>TT Roaster</strong>
+        <span data-i18n="contacts.mapFallback">ул. Имама Гази-Магомеда, 37А, Буйнакск, Республика Дагестан</span>
+      </div>
+      <iframe
+        id="mapFrame"
+        src="https://yandex.ru/map-widget/v1/?text=Республика%20Дагестан%2C%20Буйнакск%2C%20улица%20Имама%20Гази-Магомеда%2C%2037%D0%90&z=17&l=map"
+        loading="lazy"
+        title="TT Roaster на карте"
+        data-i18n-attr="title:contacts.mapTitle"
+        style="opacity:0;position:relative;transition:opacity 600ms"
+      ></iframe>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================================================
+     11. FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <svg class="footer-botanical"><use href="#botanical-branch"/></svg>
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <picture><source srcset="assets/img/emblem-real.webp" type="image/webp"><img class="brand-mark__emblem" src="assets/img/emblem-real.jpg" alt="TT Roaster" loading="lazy"></picture>
+      <p data-i18n="footer.tagline">ТТ Ростер — специалти кофе и своя обжарка. Буйнакск, Республика Дагестан.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title" data-i18n="footer.navTitle">Навигация</div>
+      <ul>
+        <li><a href="#about" data-i18n="nav.about">О нас</a></li>
+        <li><a href="#menu" data-i18n="nav.menu">Меню</a></li>
+        <li><a href="#signature" data-i18n="nav.signature">Авторские</a></li>
+        <li><a href="#atmosphere" data-i18n="nav.atmosphere">Атмосфера</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title" data-i18n="footer.menuTitle">Меню</div>
+      <ul>
+        <li><a href="#menu" data-i18n="footer.menuCoffee">Кофе</a></li>
+        <li><a href="#signature" data-i18n="footer.menuSignature">Авторские напитки</a></li>
+        <li><a href="#beans" data-i18n="footer.menuBakery">Кофе в зёрнах</a></li>
+        <li><a href="#" id="footerFullMenu" data-i18n="menu.cta">Полное меню</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title" data-i18n="footer.contactsTitle">Контакты</div>
+      <ul>
+        <li><a href="https://yandex.ru/maps/-/CTD2j69A" target="_blank" rel="noopener" data-i18n="contacts.addressValue">ул. Имама Гази-Магомеда, 37А, Буйнакск, Дагестан</a></li>
+        <li><a href="tel:+79387833000">+7 938 783-30-00</a></li>
+        <li><a href="https://instagram.com/tt.roaster" target="_blank" rel="noopener">@tt.roaster</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-i18n="footer.copyright">© 2026 ТТ Ростер. Все права защищены.</span>
+    <a href="https://yandex.ru/maps/-/CTD2j69A" target="_blank" rel="noopener" data-i18n="finalcta.cta">Построить маршрут</a>
+  </div>
+</footer>
+
+<div class="mobile-route-bar">
+  <a href="https://yandex.ru/maps/-/CTD2j69A" target="_blank" rel="noopener" class="btn btn--terracotta">
+    <span data-i18n="finalcta.cta">Построить маршрут</span>
+    <svg><use href="#icon-compass"/></svg>
+  </a>
+</div>
+
+<!-- ============================================================
+     Full menu modal
+     ============================================================ -->
+<div class="menu-modal" id="menuModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="menuModalTitle">
+  <div class="menu-modal__backdrop" data-close-modal></div>
+  <div class="menu-modal__panel">
+    <div class="menu-modal__head">
+      <h2 class="heading-md" id="menuModalTitle" data-i18n="fullmenu.title">Полное меню</h2>
+      <button class="menu-modal__close" data-close-modal aria-label="Закрыть" data-i18n-attr="aria-label:common.close"><svg><use href="#icon-close"/></svg></button>
+    </div>
+
+    <div class="menu-modal__groups">
+      <div class="menu-modal__group">
+        <div class="menu-modal__group-title" data-i18n="fullmenu.group1">Кофе</div>
+        <div class="menu-modal__rows">
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r1.name">Эспрессо</span><span class="menu-modal__row-vol">35 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">180 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r2.name">Лунго</span><span class="menu-modal__row-vol">80 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">140 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r3.name">Америка</span><span class="menu-modal__row-vol">150 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">140 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r4.name">Капучино</span><span class="menu-modal__row-vol">200 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">190 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r5.name">Флэт уайт</span><span class="menu-modal__row-vol">200 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">190 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r6.name">Латте</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">200 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r7.name">Раф</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">240 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r8.name">Моккачино</span><span class="menu-modal__row-vol">200 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">220 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r9.name">Какао</span><span class="menu-modal__row-vol">200 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">180 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g1.r10.name">Фильтр</span><span class="menu-modal__row-vol">250 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">140 ₽</span></div>
+        </div>
+      </div>
+
+      <div class="menu-modal__group">
+        <div class="menu-modal__group-title" data-i18n="fullmenu.group2">Холодный кофе</div>
+        <div class="menu-modal__rows">
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g2.r1.name">Айс кофе</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">250 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g2.r2.name">Айс-латте</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">220 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g2.r3.name">Айс-латте кокосовый</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">300 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g2.r4.name">Дабл айс</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">280 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g2.r5.name">Колд брю</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">200 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g2.r6.name">Урбечный айс</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">300 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g2.r7.name">Арахисовый айс</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">300 ₽</span></div>
+        </div>
+      </div>
+
+      <div class="menu-modal__group">
+        <div class="menu-modal__group-title" data-i18n="fullmenu.group3">Молочные коктейли</div>
+        <div class="menu-modal__rows">
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g3.r1.name">Молочный</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">220 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g3.r2.name">Банановый</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">220 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g3.r3.name">Орео</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">250 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g3.r4.name">Баунти</span><span class="menu-modal__row-vol">250 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">240 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g3.r5.name">Клубнично-банановый</span><span class="menu-modal__row-vol"></span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">240 ₽</span></div>
+        </div>
+      </div>
+
+      <div class="menu-modal__group">
+        <div class="menu-modal__group-title" data-i18n="fullmenu.group4">Бабл-ти</div>
+        <div class="menu-modal__rows">
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g4.r1.name">Ванильный бабл-ти</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">300 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g4.r2.name">Шоколадный бабл-ти</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">350 ₽</span></div>
+        </div>
+      </div>
+
+      <div class="menu-modal__group">
+        <div class="menu-modal__group-title" data-i18n="fullmenu.group5">Лимонады и фреши</div>
+        <div class="menu-modal__rows">
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g5.r1.name">Бамбл</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">160 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g5.r2.name">Бамбл фреш</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">280 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g5.r3.name">Голубая лагуна</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">190 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g5.r4.name">Лайм-маракуя</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">200 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g5.r5.name">Щавель-яблоко</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">250 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g5.r6.name">Айс-ти персик</span><span class="menu-modal__row-vol">300 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">250 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g5.r7.name">Апельсиновый фреш</span><span class="menu-modal__row-vol">250 мл</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">280 ₽</span></div>
+        </div>
+      </div>
+
+      <div class="menu-modal__group">
+        <div class="menu-modal__group-title" data-i18n="fullmenu.group6">Кофе в зёрнах</div>
+        <div class="menu-modal__rows">
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g6.r1.name">Бразилия, свежая обжарка</span><span class="menu-modal__row-vol">0,25 кг</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">650 ₽</span></div>
+          <div class="menu-modal__row"><span class="menu-modal__row-name" data-i18n="fullmenu.g6.r2.name">Бразилия, свежая обжарка</span><span class="menu-modal__row-vol">1 кг</span><span class="menu-modal__row-fill"></span><span class="menu-modal__row-price">2 000 ₽</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

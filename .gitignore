@@ -1,0 +1,11 @@
+﻿node_modules/
+.env
+.env.local
+.env.*.local
+.impeccable/
+.claude/
+.DS_Store
+Thumbs.db
+*.log
+dist/
+build/
